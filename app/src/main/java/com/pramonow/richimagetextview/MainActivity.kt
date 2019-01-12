@@ -1,26 +1,12 @@
 package com.pramonow.richimagetextview
 
-import android.media.Image
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.text.Html
-import android.view.MenuItem
-import android.widget.ImageView
-import com.squareup.picasso.Picasso
-import android.text.Spanned
 import android.text.method.LinkMovementMethod
-import android.view.View
-import android.widget.FrameLayout
-import com.dev.demidust.promoapp.utility.image.AppTextView
-import android.text.style.URLSpan
-import android.text.style.ImageSpan
 import android.text.Spannable
-import android.text.style.ClickableSpan
 import android.util.Log
 import android.widget.TextView
-import android.widget.Toast
-
 
 
 /*
@@ -28,7 +14,8 @@ import android.widget.Toast
  */
 
 class MainActivity : AppCompatActivity(), ImageClickInterface {
-    override fun onClick() {
+
+    override fun onClick(imageSource:String) {
         Log.d("baniman", "CLICK CLICK CLICK")
     }
 
@@ -85,58 +72,17 @@ class MainActivity : AppCompatActivity(), ImageClickInterface {
                 "</tbody>\n" +
                 "</table><p>Untuk katalog Weekend lainnya (periode 11-13 Januari 2019), <a href=\"http://katalogpromosi.com/tag/katalog-weekend-11-13-januari-2019\">dapat dilihat disini</a></p>"
 
-        val imageGetter = PicassoImageGetter(richText)
-        val result: Spanned
+        val imageGetter = HtmlImageRichText(richText)
+        val result: Spannable
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             result = Html.fromHtml(detail, Html.FROM_HTML_MODE_LEGACY, imageGetter,null) as Spannable
         } else {
             result = Html.fromHtml(detail, imageGetter, null) as Spannable
         }
 
-        //var spanRes = Spannable.Factory.getInstance().newSpannable(result)
-        setClickListenerOnHtmlImageGetter(result, this)
+        result.setClickListenerOnHtmlImageGetter(this)
         richText.setText(result)
         richText.setMovementMethod(LinkMovementMethod.getInstance())
 
-
-        //Picasso.get().load(imageUrl).placeholder(R.color.material_grey_600).into(promoImage)
-
-        //zoomImage.setImageDrawable(promoImage.drawable)
-
-        //promoImage.setOnClickListener { v -> Picasso.get().load(imageUrl).placeholder(R.color.material_grey_600).into(zoomImage); zoomLayout.visibility = View.VISIBLE }
     }
-
-
-    fun setClickListenerOnHtmlImageGetter(html: Spannable, callback: ImageClickInterface) {
-        val image_spans = html.getSpans(0, html.length, ImageSpan::class.java)
-
-        for (span in image_spans) {
-
-            val image_src = span.getSource()
-            val start = html.getSpanStart(span)
-            val end = html.getSpanEnd(span)
-
-            val click_span = object : ClickableSpan() {
-
-                override fun onClick(widget: View) {
-                    callback.onClick()
-                }
-            }
-
-            val click_spans = html.getSpans(start, end, ClickableSpan::class.java)
-
-            if (click_spans.size != 0) {
-
-                // remove all click spans
-                for (c_span in click_spans) {
-                    html.removeSpan(c_span)
-                }
-            }
-
-            html.setSpan(click_span, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-
-        }
-    }
-
-
 }
