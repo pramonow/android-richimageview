@@ -40,13 +40,13 @@ class MainActivity : AppCompatActivity(), ImageClickInterface {
 
         //Generate the spannable with images to be used later on
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            result = Html.fromHtml(detail, Html.FROM_HTML_MODE_LEGACY, richTextWithImages,null) as Spannable
+            result = Html.fromHtml(detail, Html.FROM_HTML_MODE_LEGACY) as Spannable
         } else {
             result = Html.fromHtml(detail, richTextWithImages, null) as Spannable
         }
 
         //setting click action on the images
-        result.setClickListenerOnHtmlImageGetter(this)
+        //result.setClickListenerOnHtmlImageGetter(this)
 
         //set the spannable result inside the text view
         richText.setText(result)
