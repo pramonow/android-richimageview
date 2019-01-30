@@ -11,8 +11,14 @@ Now with this library it will be very easy for you to show it and set click acti
 			maven { url 'https://jitpack.io' }
 		}
 	}
-  
+	
 Dependency
+
+	dependencies {
+	        implementation 'com.github.pramonow:android-richimageview:1.0'
+	}
+  
+Or you can use SNAPSHOT to keep your module up to date
 
 	dependencies {
 	        implementation 'com.github.pramonow:android-richimageview:-SNAPSHOT'
