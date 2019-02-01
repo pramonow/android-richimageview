@@ -3,7 +3,7 @@
 Have you ever gotten into issue with your rich text view/html text and your images are not showing?
 Now with this library it will be very easy for you to show it and set click action for it.
 
-<img src="https://github.com/pramonow/just_images/blob/master/RichTextViewBefore.jpg" width="180"> ==> <img src="https://github.com/pramonow/just_images/blob/master/RichTextViewAfter.jpg" width="180">
+<img src="https://github.com/pramonow/android-richimageview/blob/master/screenshoot_1.jpg" width="180"> ==> <img src="https://github.com/pramonow/android-richimageview/blob/master/screenshoot_2.jpg" width="180">
 
 	allprojects {
 		repositories {
